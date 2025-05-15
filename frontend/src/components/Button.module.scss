@@ -1,0 +1,28 @@
+@import '../styles/fonts.scss';
+
+.button {
+    border-radius: 25px;
+    border-color: black;
+    width: 80px;
+    height: 35px;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.black {
+    background: black;
+    color: white;
+    &:hover {
+        background: #21282D;
+    }
+}
+
+.white {
+    background: white;
+    color: black;
+    &:hover {
+        background: #F1F3F4
+    }
+}

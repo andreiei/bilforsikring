@@ -1,0 +1,155 @@
+[versions]
+kotlin = "2.1.20"
+logback = "1.4.14"
+ktlint = "0.50.0" # Version 1.1.1 has crazy requirements
+kotest = "5.9.1"
+kotlinxSerialization = "1.8.1"
+kotlinSnapshot = "2.3.0"
+jetbrainsAnnotations = "24.1.0"
+slf4j = "2.0.17"
+coroutine = "1.10.2"
+aws = "2.31.40"
+avroCore = "2.3.0"
+avro = "1.11.3"
+schema = "1.1.23"
+vertx = "4.5.14"
+mockk = "1.14.2"
+micrometer = "1.12.2"
+kafka = "3.6.1"
+msk = "2.3.2"
+resilienceConfig = "v0.9.0"
+resilience4j = "1.7.1"
+testcontainers = "1.19.4"
+netty = "4.2.1.Final"
+redis = "6.3.1.RELEASE"
+ktor = "2.3.13"
+deviceMgmt = "v4.37.4"
+deviceLib = "v1.9.0"
+
+[plugins]
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+cutterslade-analyze = { id = "ca.cutterslade.analyze", version = "1.10.0" }
+spotless = { id = "com.diffplug.spotless", version = "6.25.0" }
+dotenv = { id = "co.uzzu.dotenv.gradle", version = "4.0.0" }
+
+[libraries]
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
+
+schema-registry-serde = { group = "software.amazon.glue", name="schema-registry-serde", version.ref="schema" }
+schema-registry-common = { group = "software.amazon.glue", name="schema-registry-common", version.ref="schema" }
+schema-registry-kafkastreams-serde = { group = "software.amazon.glue", name="schema-registry-kafkastreams-serde", version.ref="schema" }
+avro = { group = "org.apache.avro", name="avro", version.ref="avro" }
+avro4k-core = { group = "com.github.avro-kotlin.avro4k", name="avro4k-core", version.ref="avroCore" }
+glue = { group="software.amazon.awssdk", name="glue", version = "2.31.40" }
+kafka-clients = { group="org.apache.kafka", name="kafka-clients", version.ref="kafka" }
+
+serialization-kotlinx-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core-jvm", version.ref = "kotlinxSerialization" }
+serialization-kotlinx-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json-jvm", version.ref = "kotlinxSerialization" }
+kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name="kotlinx-coroutines-core-jvm", version.ref="coroutine" }
+kotlinx-coroutines-jdk8 = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-jdk8", version.ref = "coroutine" }
+
+jetbrains-annotations = { group = "org.jetbrains", name = "annotations", version.ref = "jetbrainsAnnotations" }
+serialization-kotlinx-hocon = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-hocon", version.ref = "kotlinxSerialization" }
+typesafe-config = { group = "com.typesafe", name = "config", version = "1.4.3" }
+
+logback-classic = { group = "ch.qos.logback", name="logback-classic", version.ref="logback" }
+slf4j-api = { group = "org.slf4j", name="slf4j-api", version.ref="slf4j" }
+
+test-kotest-assertions-shared = { group = "io.kotest", name = "kotest-assertions-shared-jvm", version.ref = "kotest" }
+test-kotest-common = { group = "io.kotest", name = "kotest-common-jvm", version.ref = "kotest" }
+test-kotest-framework-api = { group = "io.kotest", name = "kotest-framework-api-jvm", version.ref = "kotest" }
+test-snapshot = { group = "com.karumi.kotlinsnapshot", name = "core", version.ref = "kotlinSnapshot" }
+
+vertx-core = { group = "io.vertx", name = "vertx-core", version.ref = "vertx" }
+vertx-coroutines = { group = "io.vertx", name = "vertx-lang-kotlin-coroutines", version.ref = "vertx" }
+vertx-kotlin = { group = "io.vertx", name = "vertx-lang-kotlin", version.ref = "vertx" }
+vertx-prometheus = { group = "io.vertx", name = "vertx-micrometer-metrics", version.ref = "vertx" }
+vertx-kafka = { group = "io.vertx", name = "vertx-kafka-client", version.ref = "vertx" }
+vertx-config-hocon = { group = "io.vertx", name = "vertx-config-hocon", version.ref = "vertx" }
+vertx-web = { group = "io.vertx", name = "vertx-web", version.ref = "vertx" }
+vertx-web-client = { group = "io.vertx", name = "vertx-web-client", version.ref = "vertx" }
+vertx-open-api = { group = "io.vertx", name = "vertx-web-openapi", version.ref = "vertx" }
+vertx-junit5 = { group = "io.vertx", name = "vertx-junit5", version.ref = "vertx" }
+vertx-sql = { group = "io.vertx", name = "vertx-sql-client", version.ref = "vertx" }
+vertx-mysql = { group = "io.vertx", name = "vertx-mysql-client", version.ref = "vertx" }
+vertx-health = { group = "io.vertx", name = "vertx-health-check", version.ref = "vertx" }
+
+io-micrometer-prometheus = { group = "io.micrometer", name = "micrometer-registry-prometheus", version.ref = "micrometer" }
+io-micrometer-core = { group = "io.micrometer", name = "micrometer-core", version.ref = "micrometer" }
+
+airthings-devicemgmt-api-client = { group = "com.airthings.device.management.api.client", name = "client", version.ref = "deviceMgmt" }
+airthings-devicemgmt-api-common = { group = "com.airthings.device.management.api.common", name = "common", version.ref = "deviceMgmt" }
+airthings-device-lib = { group = "com.airthings.device", name = "device-jvm", version.ref = "deviceLib" }
+airthings-rf-region = { group = "com.airthings.cloud.lib", name = "rf-region-jvm", version = "v2.3.0" }
+
+elasticsearch-geo = { group = "org.elasticsearch", name = "elasticsearch-geo", version = "8.12.2" }
+
+aws-dynamodb = { group = "software.amazon.awssdk", name = "dynamodb", version.ref = "aws"}
+aws-secretsmanager = { group = "software.amazon.awssdk", name = "secretsmanager", version.ref = "aws"}
+aws-s3 = { group = "software.amazon.awssdk", name = "s3", version.ref = "aws" }
+aws-netty = { group = "software.amazon.awssdk", name = "netty-nio-client", version.ref = "aws" }
+aws-auth = { group = "software.amazon.awssdk", name = "auth", version.ref = "aws" }
+aws-rds = { group = "software.amazon.awssdk", name = "rds", version.ref = "aws" }
+aws-regions = { group = "software.amazon.awssdk", name = "regions", version.ref = "aws" }
+aws-http-client-spi = { group = "software.amazon.awssdk", name = "http-client-spi", version.ref = "aws" }
+aws-msk-iam-auth = { group = "software.amazon.msk", name="aws-msk-iam-auth", version.ref="msk" }
+aws-lambda = { group = "software.amazon.awssdk", name = "lambda", version.ref = "aws" }
+aws-core = { group = "software.amazon.awssdk", name = "aws-core", version.ref = "aws" }
+aws-sdk-core = { group = "software.amazon.awssdk", name = "sdk-core", version.ref = "aws" }
+aws-url-connection-client = { group = "software.amazon.awssdk", name = "url-connection-client", version.ref = "aws" }
+
+aws-lambda-java-core = { group = "com.amazonaws", name = "aws-lambda-java-core", version = "1.2.3" }
+aws-lambda-java-events = { group = "com.amazonaws", name = "aws-lambda-java-events", version = "3.15.0" }
+
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+mockk-jvm = { group = "io.mockk", name = "mockk-jvm", version.ref = "mockk" }
+mockk-dsl-jvm = { group = "io.mockk", name = "mockk-dsl-jvm", version.ref = "mockk" }
+test-kotest-concurrency-jvm = { group = "io.kotest", name = "kotest-framework-concurrency-jvm", version.ref = "kotest" }
+test-kotest-extension-jvm = { group = "io.kotest", name = "kotest-extensions-jvm", version.ref = "kotest" }
+test-kotest-assertions-core = { group = "io.kotest", name = "kotest-assertions-core-jvm", version.ref = "kotest" }
+test-kotest-runner = { group = "io.kotest", name = "kotest-runner-junit5-jvm", version.ref = "kotest" }
+test-kotest-assertions-core-jvm = { group = "io.kotest", name = "kotest-assertions-core-jvm", version.ref = "kotest" }
+test-junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter-api", version = "5.8.2" }
+
+testcontainers = { group = "org.testcontainers", name = "testcontainers", version.ref = "testcontainers" }
+kotest-testcontainers = { group = "io.kotest.extensions", name = "kotest-extensions-testcontainers", version = "2.0.2" }
+
+apache-httpclient5 = { group = "org.apache.httpcomponents.client5", name = "httpclient5", version = "5.3.1" }
+apache-core5 = { group = "org.apache.httpcomponents.core5", name = "httpcore5", version = "5.2.4" }
+
+airthings-resilience-config = { group = "com.airthings.resilience4j", name = "resilience-config", version.ref = "resilienceConfig" }
+
+# Netty
+netty = { group = "io.netty", name = "netty-codec-http", version.ref = "netty" }
+netty-transport-native-epoll = { group = "io.netty", name = "netty-transport-native-epoll", version.ref = "netty" }
+netty-transport-native-kqueue = { group = "io.netty", name = "netty-transport-native-kqueue", version.ref = "netty" }
+netty-bom = { group = "io.netty", name = "netty-bom", version.ref = "netty" }
+netty-handler = { group = "io.netty", name = "netty-handler", version.ref = "netty" }
+
+redis-lettuce = { group = "io.lettuce", name = "lettuce-core", version.ref = "redis" }
+
+resilience-circuitbreaker = { group = "io.github.resilience4j", name = "resilience4j-circuitbreaker", version.ref = "resilience4j" }
+resilience-ratelimiter = { group = "io.github.resilience4j", name = "resilience4j-ratelimiter", version.ref = "resilience4j" }
+resilience-retry = { group = "io.github.resilience4j", name = "resilience4j-retry", version.ref = "resilience4j" }
+resilience-timelimiter = { group = "io.github.resilience4j", name = "resilience4j-timelimiter", version.ref = "resilience4j" }
+
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-java = { group = "io.ktor", name = "ktor-client-java", version.ref = "ktor" }
+
+database-mysql-connector-j = { group = "com.mysql", name = "mysql-connector-j", version = "8.0.33" }
+database-hikaricp = { group = "com.zaxxer", name = "HikariCP", version = "5.0.1" }
+
+testcontainers-mysql = { group = "org.testcontainers", name = "mysql", version.ref = "testcontainers" }
+testcontainers-jdbc = { group = "org.testcontainers", name = "jdbc", version.ref = "testcontainers" }
+kwery = { group = "com.github.andrewoma.kwery", name = "core", version = "0.17" }
+
+[bundles]
+resilience = [
+    "resilience-circuitbreaker",
+    "resilience-ratelimiter",
+    "resilience-retry",
+    "resilience-timelimiter",
+]

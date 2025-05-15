@@ -1,0 +1,68 @@
+@import '../styles/fonts.scss';
+
+.body {
+    margin: 50px;
+    border: 1px solid black;
+    @media screen and (max-width: 890px) {
+        margin: 15px;
+    }
+    padding: 20px;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inputs {
+    font-family: $font-regular;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 80vmin;
+}
+
+.header {
+    font-size: 34px;
+    font-family: $font-bold;
+    font-weight: normal;
+}
+
+.description {
+    font-size: 18px;
+    font-family: $font-regular;
+    white-space: pre-line;
+    font-weight: normal;
+    max-width: 600px;
+}

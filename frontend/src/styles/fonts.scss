@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Profilfont-Regular';
+    src: url('../fonts/Profilfont-Regular-Web.woff2') format('woff2'),
+    url('../fonts/Profilfont-Regular-Web.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Profilfont-Bold';
+    src: url('../fonts/Profilfont-Bold-Web.woff2') format('woff2'),
+    url('../fonts/Profilfont-Bold-Web.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+$font-regular: 'ProfilFront-Regular', sans-serif;
+$font-bold: 'ProfilFront-Bold', sans-serif;
