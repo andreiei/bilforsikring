@@ -4,7 +4,6 @@
     url('../fonts/Profilfont-Regular-Web.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
 }
 
 @font-face {
@@ -13,8 +12,11 @@
     url('../fonts/Profilfont-Bold-Web.woff') format('woff');
     font-weight: bold;
     font-style: normal;
-    font-display: swap;
 }
 
 $font-regular: 'ProfilFront-Regular', sans-serif;
 $font-bold: 'ProfilFront-Bold', sans-serif;
+
+$font-small: 13px;
+$font-medium: 15px;
+$font-large: 18px;

@@ -8,10 +8,11 @@
     outline: none;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    font-size: $font-small;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.black {
+.color-black {
     background: black;
     color: white;
     &:hover {
@@ -19,7 +20,7 @@
     }
 }
 
-.white {
+.color-white {
     background: white;
     color: black;
     &:hover {

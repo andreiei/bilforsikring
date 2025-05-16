@@ -1,20 +1,21 @@
 @import '../styles/fonts.scss';
+@import '../styles/media.scss';
 
 .body {
     margin: 50px;
     border: 1px solid black;
-    @media screen and (max-width: 890px) {
-        margin: 15px;
-    }
     padding: 20px;
     max-width: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-family: $font-regular;
+    @media screen and (max-width: $mobile-break) {
+        margin: 15px;
+    }
 }
 
 .inputs {
-    font-family: $font-regular;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -42,26 +43,8 @@
     margin-top: 25px;
 }
 
-.textWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    height: 80vmin;
-}
-
-.header {
-    font-size: 34px;
-    font-family: $font-bold;
-    font-weight: normal;
-}
-
 .description {
     font-size: 18px;
-    font-family: $font-regular;
     white-space: pre-line;
     font-weight: normal;
     max-width: 600px;

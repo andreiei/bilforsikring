@@ -1,4 +1,4 @@
-package com.airthings.location.test.api.router.insurance.request
+package router.insurance.request
 
 import kotlinx.serialization.Serializable
 
@@ -11,14 +11,25 @@ data class PostCarInsuranceRequest(
     val email: String,
 ) {
     fun validate() {
-        val errors = mutableListOf<String>()
+        require(registrationNumber.length in 1..8) {
+            "Registration number is required."
+        }
+        require(lastName.length in 1 .. 80) {
+            "Last name is required."
+        }
+        require(firstName.length in 1 .. 80) {
+            "First name is required."
+        }
+        require(isValidEmail(email)) {
+            "Invalid email $email"
+        }
+        require(birthNumber.length == 11) {
+            "Birth number must be 11 characters long."
+        }
+    }
 
-        if (registrationNumber.isBlank()) errors.add("Registration number is required.")
-        if (birthNumber.isBlank()) errors.add("Birth number is required.")
-        if (firstName.isBlank()) errors.add("First name is required.")
-        if (lastName.isBlank()) errors.add("Last name is required.")
-        if (!email.contains("@")) errors.add("Email must be valid.")
-
-        return errors
+    private fun isValidEmail(email: String): Boolean {
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
+        return email.matches(emailRegex) && email.length <= 255
     }
 }

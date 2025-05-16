@@ -1,4 +1,4 @@
-import com.airthings.location.test.api.router.insurance.request.PostCarInsuranceRequest
+import router.insurance.request.PostCarInsuranceRequest
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import models.AgreementId
@@ -20,6 +20,8 @@ class CarInsuranceHandler(
 
     suspend fun post(): APIGatewayProxyResponseEvent {
         val requestBody: PostCarInsuranceRequest = decodeFromString(request.body)
+        requestBody.validate()
+
         registrationService.validate(requestBody.registrationNumber)
         creditService.check(requestBody.birthNumber)
 

@@ -6,7 +6,6 @@
     height: 75px;
     max-width: 175px;
     min-width: 120px;
-    width: 100%;
     gap: 8px;
 }
 
@@ -17,67 +16,10 @@
 .dropdown {
     max-width: 180px;
     height: 35px;
-    font-size: 12px;
+    font-size: $font-regular;
+    transition: background 0.2s ease;
 }
 
 .label {
-    font-family: $font-regular;
-    font-size: 14px;
-}
-
-.header {
-    font: $font-regular;
-    height: 22px;
-    padding: 10px;
-    display: block;
-}
-
-.list {
-    overflow: scroll;
-    min-height: 200px;
-    max-height: 300px;
-    width: 100%;
-    // border-bottom: 1px solid $grey-mist;
-}
-
-.noSpacesList {
-    min-height: unset;
-    max-height: unset;
-    height: 40px;
-}
-
-.listWrapper {
-    width: 100%;
-    background: white;
-    border-radius: 10px;
-    // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-}
-
-.noSpaces {
-    //font: $font-medium $regular;
-    //color: $oslo-gray;
-    margin-left: 10px;
-}
-
-.listElement {
-    font-family: $font-regular;
-    color: black;
-    white-space: nowrap;
-    padding: 5px 12px;
-    height: 32px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    &:focus,
-    &:hover {
-        cursor: pointer;
-        background: grey;
-        border-radius: 10px;
-    }
-}
-
-.button {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    padding: 15px 10px;
+    font-size: $font-small;
 }

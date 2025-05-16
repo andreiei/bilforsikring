@@ -15,6 +15,7 @@ type Props = {
     isValid?: boolean;
     validate: boolean;
     maxLength?: number;
+    testId?: string;
 };
 
 const Input = ({
@@ -29,6 +30,7 @@ const Input = ({
     onBlur,
     onKeyUp,
     id,
+    testId,
 }: Props): React.ReactElement => {
     return (
         <div className={styles.inputContainer}>
@@ -48,35 +50,12 @@ const Input = ({
                 onKeyUp={onKeyUp}
                 placeholder={placeholder && txt(placeholder)}
                 value={value}
-                required
                 maxLength={maxLength}
-
-                /* required={required}
-                onChange={onChange}
-                onBlur={onBlur}
-                onKeyUp={onKeyUp}
-                placeholder={placeholder}
-                autoComplete={autoComplete}
-                defaultValue={defaultValue}
-                maxLength={maxLength}
-                {...(testAttr !== undefined ? { [`data-${testAttr}`]: true } : {})}
-                value={currentValue}
-                accept={accept}
-                disabled={disabled}
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus={autoFocus}
-                data-form-type="other" // preventing Dashlane from trying to auto fill
                 {...{ 'data-testid': testId }}
-                ref={innerRef} */
             />
             {!isValid && validate && validationHint && <div className={styles.error}>{txt(validationHint)}</div>}
         </div>
     );
 };
-
-/*
- {validate && !isValid && hint && <div className="input-container__error">{hint && txt(hint)}</div>}
-            {validate && isValid && checkmark}
- */
 
 export default Input;

@@ -11,17 +11,10 @@ type Props = {
     isValid?: boolean;
     validate: boolean;
     value?: string;
+    testId?: string;
 };
 
-const Dropdown = ({
-    value = undefined,
-    isValid = true,
-    validate,
-    options,
-    onSelect,
-    title,
-    id,
-}: Props): ReactElement => {
+const Dropdown = ({ value, isValid, validate, options, onSelect, title, id, testId }: Props): ReactElement => {
     return (
         <div className={styles.dropdownContainer}>
             <label htmlFor={id} className={styles.label}>
@@ -31,9 +24,10 @@ const Dropdown = ({
                 className={classNames(styles.dropdown, {
                     [styles.invalid]: isValid === false && validate,
                 })}
-                value={value}
+                value={value ?? ''}
                 id={id}
                 onChange={e => onSelect(e.target.value)}
+                {...{ 'data-testid': testId }}
             >
                 {!value && (
                     <option value="" disabled>

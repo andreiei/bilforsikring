@@ -1,11 +1,11 @@
 {
     "BirthNumber": "Fødselsnummer",
     "Buy": "Kjøp",
-    "BirthNumberHint": "11 siffer",
+    "BirthNumberPlaceholder": "11 siffer",
     "Bonus": "Din bonus",
     "Cancel": "Cancel",
     "CarRegistrationNumber": "Bilens registeringsnummer",
-    "CarRegistrationNumberHint": "E.g AB 12345",
+    "CarRegistrationNumberPlaceholder": "E.g AB 12345",
     "Description": "Det er fire forskjellige forsikringer å velge mellom.\nAnsvarsforsikring er lovpålagt om kjøretøyet er registrert og skal brukes på veien. I tillegg kan du utvide forsikringen avhengig av hvor gammel bilen din er og hvordan du bruker den",
     "DropdownPlaceholder": "Select",
     "Email": "E-post",
@@ -13,5 +13,6 @@
     "Header": "Kjøp Bilforsikring",
     "LastName": "Etternavn",
     "ValidEmailHint": "Skriv en gyldig e-postadresse",
-    "ValidBirthNumberHint": "Ugyldig fødelsnummer"
+    "ValidBirthNumberHint": "Ugyldig fødelsnummer",
+    "ValidRegistrationNumberHint": "Ugyldig registeringsnummer"
 }

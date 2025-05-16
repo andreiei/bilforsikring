@@ -7,7 +7,7 @@ import utils.ResponseBuilder
 object FailureHandler {
     fun handle(throwable: Throwable): APIGatewayProxyResponseEvent {
         val errorResponse: ErrorResponse = handleFailure(throwable)
-        return ResponseBuilder.respondWithContent(errorResponse, errorResponse.code,)
+        return ResponseBuilder.respondWithContent(errorResponse, errorResponse.code)
     }
 
     private fun handleFailure(failure: Throwable): ErrorResponse {
@@ -24,13 +24,6 @@ object FailureHandler {
                     error = ErrorCode.UNAUTHORIZED,
                     description = failure.message,
                     status = HttpResponseStatus.UNAUTHORIZED,
-                )
-
-            is ApiException.ForbiddenException ->
-                ErrorResponse(
-                    error = ErrorCode.FORBIDDEN,
-                    description = failure.message,
-                    status = HttpResponseStatus.FORBIDDEN,
                 )
 
             is ApiException.NotFoundException ->

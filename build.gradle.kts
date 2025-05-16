@@ -1,12 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    `version-catalog`
     alias(libs.plugins.kotlin.jvm) apply true
     alias(libs.plugins.spotless) apply true
     alias(libs.plugins.cutterslade.analyze) apply true
     alias(libs.plugins.kotlin.serialization) apply true
-    alias(libs.plugins.dotenv) apply true
 }
 
 repositories {
@@ -19,8 +17,6 @@ dependencies {
 }
 
 allprojects {
-    group = "com.airthings.location"
-
     apply(plugin = "com.diffplug.spotless")
     apply(plugin = "ca.cutterslade.analyze")
     apply(plugin = "org.jetbrains.kotlin.jvm")
@@ -28,12 +24,11 @@ allprojects {
 
     repositories {
         mavenCentral()
-        airthings()
     }
 
     tasks.withType<KotlinCompile>().all {
         kotlinOptions {
-            jvmTarget = "17"
+            jvmTarget = "21"
         }
     }
     tasks.withType<Test> {
@@ -45,7 +40,7 @@ allprojects {
         }
     }
 
-    /*tasks.register("runSpotlessApply", org.gradle.api.DefaultTask::class.java) {
+    tasks.register("runSpotlessApply", org.gradle.api.DefaultTask::class.java) {
         dependsOn("spotlessApply")
         doLast {
             exec {
@@ -56,7 +51,7 @@ allprojects {
     }
     tasks.named("build") {
         dependsOn("runSpotlessApply")
-    }*/
+    }
 
     spotless {
         kotlin {
@@ -69,8 +64,8 @@ allprojects {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType<KotlinCompile> {
@@ -78,16 +73,3 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "21"
     }
 }
-
-fun RepositoryHandler.airthings() =
-    maven {
-        name = "com.airthings.github.packages"
-        url = uri("https://maven.pkg.github.com/Airthings/*")
-        credentials {
-            username = env.fetchOrNull("GITHUB_USERNAME")
-                ?: System.getenv("GITHUB_USERNAME")
-                ?: System.getenv("GITHUB_ACTOR")
-            password = env.fetchOrNull("GITHUB_ACCESS_TOKEN_READ_PACKAGES")
-                ?: System.getenv("GITHUB_ACCESS_TOKEN_READ_PACKAGES")
-        }
-    }
