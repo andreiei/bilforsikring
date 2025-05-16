@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react';
 import classNames from 'classnames';
 import styles from './Dropdown.module.scss';
-import {txt} from "../utils/translate";
-
+import { txt } from '../utils/translate';
 
 type Props = {
     title: string;
@@ -10,26 +9,41 @@ type Props = {
     options: string[];
     id: string;
     isValid?: boolean;
-    validate: boolean
+    validate: boolean;
     value?: string;
 };
 
-const Dropdown = ({ value, isValid, validate, options, onSelect, title, id }: Props): ReactElement => {
+const Dropdown = ({
+    value = undefined,
+    isValid = true,
+    validate,
+    options,
+    onSelect,
+    title,
+    id,
+}: Props): ReactElement => {
     return (
         <div className={styles.dropdownContainer}>
-            <label className={styles.label}>
+            <label htmlFor={id} className={styles.label}>
                 {txt(title)}
             </label>
             <select
                 className={classNames(styles.dropdown, {
-                    [styles.invalid]: isValid === false && validate
+                    [styles.invalid]: isValid === false && validate,
                 })}
                 value={value}
-                onChange={(e) => onSelect(e.target.value)}
+                id={id}
+                onChange={e => onSelect(e.target.value)}
             >
-                {!value && <option value="" disabled>{txt("DropdownPlaceholder")}</option>}
-                {options.map((opt) => (
-                    <option key={opt} value={opt}>{opt}</option>
+                {!value && (
+                    <option value="" disabled>
+                        {txt('DropdownPlaceholder')}
+                    </option>
+                )}
+                {options.map(opt => (
+                    <option key={opt} value={opt}>
+                        {opt}
+                    </option>
                 ))}
             </select>
         </div>

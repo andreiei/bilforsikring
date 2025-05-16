@@ -1,4 +1,3 @@
-
 export interface CarInsuranceRequest {
     registrationNumber: string;
     birthNumber: string;
@@ -14,8 +13,8 @@ export enum Status {
 }
 
 export interface CarInsuranceResponse {
-    agreementNumber: string,
-    status: Status
+    agreementNumber: string;
+    status: Status;
 }
 
 /**
@@ -24,11 +23,12 @@ export interface CarInsuranceResponse {
  *
  * Depending on the authentication method, the request would contain an access token to validate the request.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const postCarInsurance = async (request: CarInsuranceRequest): Promise<CarInsuranceResponse> => {
     return {
-        agreementNumber: "123",
+        agreementNumber: '123',
         status: Status.PENDING,
     };
-}
+};
 
 export default postCarInsurance;

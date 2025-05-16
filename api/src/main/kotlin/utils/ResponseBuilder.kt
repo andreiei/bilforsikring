@@ -1,13 +1,13 @@
-package com.airthings.location.test.api
+package utils
 
-import com.airthings.location.common.utils.encodeToString
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
+import encodeToString
 
 class ResponseBuilder {
     companion object {
-        inline fun <reified T> respondWithJson(
-            statusCode: Int = 200,
+        inline fun <reified T> respondWithContent(
             body: T,
+            statusCode: Int = 200,
         ): APIGatewayProxyResponseEvent {
             return APIGatewayProxyResponseEvent()
                 .withStatusCode(statusCode)

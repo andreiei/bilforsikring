@@ -1,4 +1,4 @@
-/* const customRules = {
+const customRules = {
     "indent": ["error", 4],
     'prettier/prettier': [
         'error',
@@ -7,6 +7,12 @@
             useTabs: false,
             semi: true,
             singleQuote: true,
+        },
+    ],
+    'react/require-default-props': [
+        'off',
+        {
+            ignoreFunctionalComponents: true,
         },
     ],
     'react/function-component-definition': [
@@ -111,4 +117,3 @@ module.exports = {
         project: './tsconfig.json',
     },
 };
-*/

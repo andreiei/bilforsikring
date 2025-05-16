@@ -24,12 +24,13 @@
       "../node_modules/@types"
     ],
     "types": [
+        "jest",
       "node",
       "@wdio/globals/types",
       "expect-webdriverio",
       "@wdio/mocha-framework",
       "@wdio/appium-service"
-    ],
+    ]
   },
   "include": [
     "src/**/*.json",

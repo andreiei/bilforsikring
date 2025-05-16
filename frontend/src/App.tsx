@@ -1,10 +1,8 @@
 import React from 'react';
-import CarInsuranceForm from "./features/CarInsuranceForm";
+import CarInsuranceForm from './features/CarInsuranceForm';
 
 const App: () => React.ReactElement = (): React.ReactElement => {
-    return (
-        <CarInsuranceForm />
-    );
+    return <CarInsuranceForm />;
 };
 
 export default App;

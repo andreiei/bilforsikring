@@ -1,9 +1,10 @@
-import React, {SyntheticEvent} from 'react';
-import styles from './Input.module.scss'
-import {txt} from "../utils/translate";
-import classNames from "classnames";
+import React, { SyntheticEvent } from 'react';
+import classNames from 'classnames';
+import styles from './Input.module.scss';
+import { txt } from '../utils/translate';
 
 type Props = {
+    id: string;
     value: string;
     placeholder?: string;
     onChange: (e: SyntheticEvent<HTMLInputElement>) => void;
@@ -11,20 +12,34 @@ type Props = {
     onKeyUp?: (e: React.KeyboardEvent) => void;
     label?: string;
     validationHint?: string;
-    isValid?: boolean
+    isValid?: boolean;
     validate: boolean;
     maxLength?: number;
-}
+};
 
-const Input = ({ maxLength = 255, validate, isValid, validationHint, value, label, placeholder, onChange, onBlur, onKeyUp }: Props): React.ReactElement => {
+const Input = ({
+    maxLength = 255,
+    validate,
+    isValid,
+    validationHint,
+    value,
+    label,
+    placeholder,
+    onChange,
+    onBlur,
+    onKeyUp,
+    id,
+}: Props): React.ReactElement => {
     return (
         <div className={styles.inputContainer}>
             {label && (
-                <label className={styles.label}>{txt(label)}</label>
+                <label htmlFor={id} className={styles.label}>
+                    {txt(label)}
+                </label>
             )}
             <input
                 className={classNames(styles.input, {
-                    [styles.invalid]: isValid === false && validate
+                    [styles.invalid]: isValid === false && validate,
                 })}
                 type="text"
                 id="id"
@@ -36,7 +51,7 @@ const Input = ({ maxLength = 255, validate, isValid, validationHint, value, labe
                 required
                 maxLength={maxLength}
 
-                /*required={required}
+                /* required={required}
                 onChange={onChange}
                 onBlur={onBlur}
                 onKeyUp={onKeyUp}
@@ -52,17 +67,16 @@ const Input = ({ maxLength = 255, validate, isValid, validationHint, value, labe
                 autoFocus={autoFocus}
                 data-form-type="other" // preventing Dashlane from trying to auto fill
                 {...{ 'data-testid': testId }}
-                ref={innerRef}*/
+                ref={innerRef} */
             />
             {!isValid && validate && validationHint && <div className={styles.error}>{txt(validationHint)}</div>}
         </div>
-    )
-}
+    );
+};
 
 /*
  {validate && !isValid && hint && <div className="input-container__error">{hint && txt(hint)}</div>}
             {validate && isValid && checkmark}
  */
-
 
 export default Input;

@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
-import styles from './Button.module.scss'
 import classNames from 'classnames';
-import {txt} from "../utils/translate";
+import styles from './Button.module.scss';
+import { txt } from '../utils/translate';
 
 export type ButtonColor = 'black' | 'white';
 
@@ -9,20 +9,14 @@ type Props = {
     onClick: (e: SyntheticEvent<HTMLButtonElement>) => void | Promise<void>;
     title: string;
     color: ButtonColor;
-    loading?: boolean;
 };
 
-const Button = ({ loading, onClick, title, color }: Props): React.ReactElement => {
+const Button = ({ onClick, title, color }: Props): React.ReactElement => {
     return (
-        <button
-            className={classNames(styles.button, styles[color])}
-            onClick={onClick}
-            type="button"
-        >
-            {loading ? "..." : txt(title)}
+        <button className={classNames(styles.button, styles[color])} onClick={onClick} type="button">
+            {txt(title)}
         </button>
-    )
-}
+    );
+};
 
 export default Button;
-
