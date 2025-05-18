@@ -1,19 +1,18 @@
-import com.airthings.location.test.api.models.CustomPath
-import com.airthings.location.test.api.router.AbstractRoutes
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import failure.ApiException
-import kotlinx.serialization.ExperimentalSerializationApi
+import router.ApiRequest
+import router.Routes
+import router.insurance.CarInsuranceHandler
 
 class CarInsuranceRoutes(
-    private val request: APIGatewayProxyRequestEvent,
-    private val handler: CarInsuranceHandler = CarInsuranceHandler(request),
-) : AbstractRoutes() {
-    override fun getRoutes(path: CustomPath): APIGatewayProxyResponseEvent {
+    private val apiContext: ApiContext = ApiContext(),
+    private val handler: CarInsuranceHandler = CarInsuranceHandler(apiContext),
+) : Routes() {
+    override fun invoke(path: String, request: ApiRequest): APIGatewayProxyResponseEvent {
         return when (path) {
             "POST /car-insurance" -> handler::post
             else -> throw ApiException.NotFoundException("Unsupported method and path: $path")
         }
-            .call()
+            .invoke(request)
     }
 }

@@ -24,13 +24,7 @@
       "../node_modules/@types"
     ],
     "types": [
-        "jest",
-        "mocha",
       "node",
-      "@wdio/globals/types",
-      "expect-webdriverio",
-      "@wdio/mocha-framework",
-      "@wdio/appium-service"
     ]
   },
   "include": [

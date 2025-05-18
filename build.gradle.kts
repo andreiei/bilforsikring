@@ -26,6 +26,10 @@ allprojects {
         mavenCentral()
     }
 
+    kotlin {
+        jvmToolchain(21)
+    }
+
     tasks.withType<KotlinCompile>().all {
         kotlinOptions {
             jvmTarget = "21"

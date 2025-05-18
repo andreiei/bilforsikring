@@ -3,13 +3,14 @@ import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import failure.FailureHandler
-import kotlinx.serialization.ExperimentalSerializationApi
+import router.ApiRequest.Companion.toRequest
 import java.util.logging.Logger
 
 @Suppress("Unused")
 class Handler(
-    private val apiConfig: ApiConfig = ApiConfig(),
-    private val failureHandler: FailureHandler = FailureHandler,
+    private val failureHandler: FailureHandler = FailureHandler(),
+    private val apiContext: ApiContext = ApiContext(),
+    private val router: Router = Router(apiContext),
 ) : RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
     private val log: Logger = Logger.getLogger(Handler::class.java.name)
 
@@ -18,9 +19,10 @@ class Handler(
         context: Context?,
     ): APIGatewayProxyResponseEvent {
         return try {
-            Router(request = event).init()
+            log.info("HERE")
+            router(event.toRequest())
         } catch (throwable: Throwable) {
-            return failureHandler.handle(throwable)
+            return failureHandler(throwable)
         }
     }
 }

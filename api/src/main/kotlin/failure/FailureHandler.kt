@@ -4,15 +4,16 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import io.netty.handler.codec.http.HttpResponseStatus
 import utils.ResponseBuilder
 
-object FailureHandler {
-    fun handle(throwable: Throwable): APIGatewayProxyResponseEvent {
+class FailureHandler {
+    operator fun invoke(throwable: Throwable): APIGatewayProxyResponseEvent {
         val errorResponse: ErrorResponse = handleFailure(throwable)
+        throwable.printStackTrace()
         return ResponseBuilder.respondWithContent(errorResponse, errorResponse.code)
     }
 
     private fun handleFailure(failure: Throwable): ErrorResponse {
         return when (failure) {
-            is ApiException.BadRequestException ->
+            is ApiException.BadRequestException, is IllegalArgumentException ->
                 ErrorResponse(
                     error = ErrorCode.BAD_REQUEST,
                     description = failure.message,
@@ -31,6 +32,13 @@ object FailureHandler {
                     error = ErrorCode.NOT_FOUND,
                     description = failure.message,
                     status = HttpResponseStatus.NOT_FOUND,
+                )
+
+            is ApiException.FailedToCreateCarInsurance ->
+                ErrorResponse(
+                    error = ErrorCode.FAILED_TO_CREATE_CAR_INSURANCE,
+                    description = failure.message,
+                    status = HttpResponseStatus.INTERNAL_SERVER_ERROR,
                 )
 
             else ->

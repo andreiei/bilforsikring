@@ -13,9 +13,5 @@ class ResponseBuilder {
                 .withStatusCode(statusCode)
                 .withBody(encodeToString(body))
         }
-
-        fun respond(): APIGatewayProxyResponseEvent {
-            return APIGatewayProxyResponseEvent().withStatusCode(204)
-        }
     }
 }

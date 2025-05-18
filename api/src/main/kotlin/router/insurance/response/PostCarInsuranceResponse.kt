@@ -4,11 +4,11 @@ import models.AgreementId
 @Serializable
 data class PostCarInsuranceResponse(
     val agreementId: AgreementId,
-    val status: CarInsuranceStatus
+    val status: InsuranceStatus,
 )
 
-enum class CarInsuranceStatus {
+@Serializable
+enum class InsuranceStatus {
     PENDING,
-    ACCEPTED,
-    DECLINED,
+    SENT,
 }

@@ -12,7 +12,7 @@ export type Props = {
     testId?: string;
 };
 
-const Button = ({ testId, onClick, title, color }: Props): React.ReactElement => {
+function Button({ testId, onClick, title, color }: Props): React.ReactElement {
     return (
         <button
             className={classNames(styles.button, styles[`color-${color}`])}
@@ -23,6 +23,6 @@ const Button = ({ testId, onClick, title, color }: Props): React.ReactElement =>
             {txt(title)}
         </button>
     );
-};
+}
 
 export default Button;

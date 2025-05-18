@@ -1,42 +1,60 @@
-import router.insurance.request.PostCarInsuranceRequest
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent
+package router.insurance
+
+import ApiContext
+import InsuranceStatus
+import PostCarInsuranceResponse
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
+import decodeFromString
+import failure.ApiException
 import models.AgreementId
 import models.CustomerId
-import services.CreditService
-import services.FagSystem
-import services.RegistrationService
+import router.ApiRequest
+import router.insurance.request.PostCarInsuranceRequest
+import services.FagSystem.Companion.FagSystemAgreementStatus
 import utils.ResponseBuilder
-import java.util.logging.Logger.getLogger
+import java.util.logging.Logger
 
 class CarInsuranceHandler(
-    private val request: APIGatewayProxyRequestEvent,
-    private val fagSystem: FagSystem = FagSystem(),
-    private val letterService: LetterService = LetterService(),
-    private val registrationService: RegistrationService = RegistrationService(),
-    private val creditService: CreditService = CreditService(),
+    private val apiContext: ApiContext = ApiContext(),
 ) {
-    private val log: java.util.logging.Logger = getLogger(CarInsuranceHandler::class.java.name)
+    private val log: Logger = Logger.getLogger(CarInsuranceHandler::class.java.name)
 
-    suspend fun post(): APIGatewayProxyResponseEvent {
+    fun post(request: ApiRequest): APIGatewayProxyResponseEvent {
         val requestBody: PostCarInsuranceRequest = decodeFromString(request.body)
         requestBody.validate()
 
-        registrationService.validate(requestBody.registrationNumber)
-        creditService.check(requestBody.birthNumber)
+        return kotlin.runCatching {
+            val customerId: CustomerId = apiContext.fagSystem.createCustomer(
+                nationalId = requestBody.birthNumber,
+                lastName = requestBody.lastName,
+                firstName = requestBody.firstName,
+                email = requestBody.email,
+            )
 
-        val customerId: CustomerId = fagSystem.createCustomer()
-        val agreementId: AgreementId = fagSystem.createAgreement(customerId)
+            val agreementId: AgreementId = apiContext.fagSystem.createAgreement(
+                customerId = customerId,
+                registrationNumber = requestBody.registrationNumber,
+            )
 
-        val status = letterService.send(customerId, agreementId)
+            apiContext.letterService.send(customerId, agreementId, requestBody.registrationNumber)
 
-        fagSystem.updateStatus(agreementId)
+            val status: FagSystemAgreementStatus = apiContext.fagSystem.updateStatus(agreementId)
 
-        val response = PostCarInsuranceResponse(
-            agreementId = agreementId,
-            status = CarInsuranceStatus.ACCEPTED
-        )
+            val response = PostCarInsuranceResponse(
+                agreementId = agreementId,
+                status = status.toResponseEnum(),
+            )
+            ResponseBuilder.respondWithContent(response)
+        }.getOrElse {
+            log.warning("Failed to process car insurance request: ${it.message}")
+            throw ApiException.FailedToCreateCarInsurance()
+        }
+    }
 
-        return ResponseBuilder.respondWithContent(response)
+    private fun FagSystemAgreementStatus.toResponseEnum(): InsuranceStatus {
+        return when (this) {
+            FagSystemAgreementStatus.PENDING -> InsuranceStatus.PENDING
+            FagSystemAgreementStatus.SENT -> InsuranceStatus.SENT
+        }
     }
 }

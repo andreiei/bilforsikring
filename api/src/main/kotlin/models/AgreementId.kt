@@ -6,6 +6,4 @@ import kotlinx.serialization.Serializable
 @Serializable
 value class AgreementId(private val value: String) {
     override fun toString(): String = value
-
 }
-

@@ -1,7 +1,7 @@
 import en from '../locales/no.json';
 
 /**
- * A stand in for a proper react-i18next implementation.
+ * A stand in for a react-i18next implementation with support for nested translation strings and multiple languages.
  */
 export function txt(key: string, vars?: Record<string, string | number>): string {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

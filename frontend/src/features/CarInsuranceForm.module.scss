@@ -9,9 +9,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: $font-regular;
     @media screen and (max-width: $mobile-break) {
-        margin: 15px;
+        margin: 10px;
     }
 }
 
@@ -44,8 +43,12 @@
 }
 
 .description {
-    font-size: 18px;
+    font: $font-large $font-regular;
     white-space: pre-line;
-    font-weight: normal;
     max-width: 600px;
+    margin-bottom: 15px;
+}
+
+.header {
+    font: $h1 $font-bold;
 }

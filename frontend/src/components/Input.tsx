@@ -18,7 +18,7 @@ type Props = {
     testId?: string;
 };
 
-const Input = ({
+function Input({
     maxLength = 255,
     validate,
     isValid,
@@ -31,7 +31,7 @@ const Input = ({
     onKeyUp,
     id,
     testId,
-}: Props): React.ReactElement => {
+}: Props): React.ReactElement {
     return (
         <div className={styles.inputContainer}>
             {label && (
@@ -56,6 +56,6 @@ const Input = ({
             {!isValid && validate && validationHint && <div className={styles.error}>{txt(validationHint)}</div>}
         </div>
     );
-};
+}
 
 export default Input;

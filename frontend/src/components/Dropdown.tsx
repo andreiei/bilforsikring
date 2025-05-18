@@ -14,7 +14,7 @@ type Props = {
     testId?: string;
 };
 
-const Dropdown = ({ value, isValid, validate, options, onSelect, title, id, testId }: Props): ReactElement => {
+function Dropdown({ value, isValid, validate, options, onSelect, title, id, testId }: Props): ReactElement {
     return (
         <div className={styles.dropdownContainer}>
             <label htmlFor={id} className={styles.label}>
@@ -42,6 +42,6 @@ const Dropdown = ({ value, isValid, validate, options, onSelect, title, id, test
             </select>
         </div>
     );
-};
+}
 
 export default Dropdown;

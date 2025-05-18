@@ -9,17 +9,16 @@
     max-width: 180px;
     min-width: 120px;
     width: 100%;
+    font-family: $font-regular;
 }
 
 .input {
-    max-width: 180px;
-    min-width: 120px;
     height: 30px;
-    font-size: 12px;
+    font-size: $font-small
 }
 
 .label {
-    font-size: 14px;
+    font-size: $font-medium;
 }
 
 .invalid {
@@ -27,6 +26,6 @@
 }
 
 .error {
-    font-size: 12px;
+    font-size: $font-small;
     color: red;
 }

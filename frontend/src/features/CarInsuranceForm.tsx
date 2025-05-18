@@ -6,13 +6,13 @@ import Dropdown from '../components/Dropdown';
 import Input from '../components/Input';
 import { txt } from '../utils/translate';
 
-const CarInsuranceForm: () => React.ReactElement = (): React.ReactElement => {
+const CarInsuranceForm = (): React.ReactElement => {
     const [registrationNumber, setRegistrationNumber] = useState<string>('');
     const [birthNumber, setBirthNumber] = useState<string>('');
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
-    const [bonus, setBonus] = useState<string | undefined>(undefined);
+    const [bonus, setBonus] = useState<string>('');
 
     const [isFormValid, setIsFormValid] = useState(true);
 
@@ -53,6 +53,7 @@ const CarInsuranceForm: () => React.ReactElement = (): React.ReactElement => {
                 registrationNumber: registrationNumber.trim(),
                 email: email.trim(),
                 birthNumber: birthNumber.trim(),
+                bonus,
             };
             postCarInsurance(request)
                 .then((): void => {
@@ -65,13 +66,13 @@ const CarInsuranceForm: () => React.ReactElement = (): React.ReactElement => {
     };
 
     const onCancelForm = (): void => {
-        // Go back to main page
+        // TODO Go back to main page
     };
 
     return (
         <div className={styles.body}>
             <h1 className={styles.header}>{txt('Header')}</h1>
-            <p className={styles.description}>{txt('Description')}</p>
+            <div className={styles.description}>{txt('Description')}</div>
             <div className={styles.form}>
                 <div className={styles.inputs}>
                     <Input

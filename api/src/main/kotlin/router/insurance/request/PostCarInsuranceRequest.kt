@@ -1,29 +1,31 @@
 package router.insurance.request
 
 import kotlinx.serialization.Serializable
+import models.NationalId
 
 @Serializable
 data class PostCarInsuranceRequest(
     val registrationNumber: String,
-    val birthNumber: String,
+    val birthNumber: NationalId,
     val firstName: String,
     val lastName: String,
     val email: String,
+    val bonus: String,
 ) {
     fun validate() {
         require(registrationNumber.length in 1..8) {
             "Registration number is required."
         }
-        require(lastName.length in 1 .. 80) {
+        require(lastName.length in 1..80) {
             "Last name is required."
         }
-        require(firstName.length in 1 .. 80) {
+        require(firstName.length in 1..80) {
             "First name is required."
         }
         require(isValidEmail(email)) {
             "Invalid email $email"
         }
-        require(birthNumber.length == 11) {
+        require(birthNumber.toString().length == 11) {
             "Birth number must be 11 characters long."
         }
     }
