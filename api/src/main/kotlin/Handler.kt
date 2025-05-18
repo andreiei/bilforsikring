@@ -1,28 +1,33 @@
+import ApiRequest.Companion.toApiRequest
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import failure.FailureHandler
-import router.ApiRequest.Companion.toRequest
-import java.util.logging.Logger
+import router.Router
 
-@Suppress("Unused")
 class Handler(
-    private val failureHandler: FailureHandler = FailureHandler(),
     private val apiContext: ApiContext = ApiContext(),
     private val router: Router = Router(apiContext),
+    private val failureHandler: FailureHandler = FailureHandler(),
 ) : RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
-    private val log: Logger = Logger.getLogger(Handler::class.java.name)
 
     override fun handleRequest(
         event: APIGatewayProxyRequestEvent,
         context: Context?,
     ): APIGatewayProxyResponseEvent {
-        return try {
-            log.info("HERE")
-            router(event.toRequest())
+        val response: ApiResponse = try {
+            router(event.toApiRequest())
         } catch (throwable: Throwable) {
-            return failureHandler(throwable)
+            failureHandler(throwable)
         }
+        return respondWithContent(response.body, response.code)
     }
+
+    private fun respondWithContent(
+        body: String,
+        statusCode: Int = 200,
+    ): APIGatewayProxyResponseEvent = APIGatewayProxyResponseEvent()
+        .withStatusCode(statusCode)
+        .withBody(body)
 }

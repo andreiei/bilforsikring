@@ -2,7 +2,7 @@
 kotlin = "2.1.20"
 ktlint = "0.50.0"
 kotest = "5.9.1"
-kotlinxSerialization = "1.8.1"
+kotlinxSerialization = "1.6.3"
 annotations = "24.1.0"
 mockk = "1.14.2"
 netty = "4.2.1.Final"
@@ -30,6 +30,7 @@ netty = { group = "io.netty", name = "netty-codec-http", version.ref = "netty" }
 test-kotest-assertions-shared = { group = "io.kotest", name = "kotest-assertions-shared-jvm", version.ref = "kotest" }
 test-kotest-common = { group = "io.kotest", name = "kotest-common-jvm", version.ref = "kotest" }
 test-kotest-framework-api = { group = "io.kotest", name = "kotest-framework-api-jvm", version.ref = "kotest" }
+test-kotest-runner = { group = "io.kotest", name = "kotest-runner-junit5-jvm", version.ref = "kotest" }
 
 mockk-jvm = { group = "io.mockk", name = "mockk-jvm", version.ref = "mockk" }
 mockk-dsl-jvm = { group = "io.mockk", name = "mockk-dsl-jvm", version.ref = "mockk" }

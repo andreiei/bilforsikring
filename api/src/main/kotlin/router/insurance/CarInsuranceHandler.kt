@@ -1,17 +1,15 @@
 package router.insurance
 
 import ApiContext
+import ApiRequest
+import ApiResponse
 import InsuranceStatus
 import PostCarInsuranceResponse
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
-import decodeFromString
 import failure.ApiException
 import models.AgreementId
 import models.CustomerId
-import router.ApiRequest
 import router.insurance.request.PostCarInsuranceRequest
 import services.FagSystem.Companion.FagSystemAgreementStatus
-import utils.ResponseBuilder
 import java.util.logging.Logger
 
 class CarInsuranceHandler(
@@ -19,8 +17,8 @@ class CarInsuranceHandler(
 ) {
     private val log: Logger = Logger.getLogger(CarInsuranceHandler::class.java.name)
 
-    fun post(request: ApiRequest): APIGatewayProxyResponseEvent {
-        val requestBody: PostCarInsuranceRequest = decodeFromString(request.body)
+    fun post(request: ApiRequest): ApiResponse {
+        val requestBody: PostCarInsuranceRequest = request.getBody()
         requestBody.validate()
 
         return kotlin.runCatching {
@@ -44,9 +42,9 @@ class CarInsuranceHandler(
                 agreementId = agreementId,
                 status = status.toResponseEnum(),
             )
-            ResponseBuilder.respondWithContent(response)
+            ApiResponse.from(response)
         }.getOrElse {
-            log.warning("Failed to process car insurance request: ${it.message}")
+            log.info("Failed to process car insurance request: ${it.message}")
             throw ApiException.FailedToCreateCarInsurance()
         }
     }

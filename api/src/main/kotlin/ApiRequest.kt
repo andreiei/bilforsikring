@@ -1,7 +1,4 @@
-package router
-
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent
-import decodeFromString
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,8 +7,12 @@ data class ApiRequest(
     val path: String,
     val httpMethod: String,
 ) {
+    inline fun <reified T> getBody(): T = decodeFromString<T>(body)
+
+    fun getCustomPath(): String = path.removePrefix("/v1").let { "$httpMethod $it" }
+
     companion object {
-        fun APIGatewayProxyRequestEvent.toRequest(): ApiRequest {
+        fun APIGatewayProxyRequestEvent.toApiRequest(): ApiRequest {
             return ApiRequest(
                 body = body,
                 path = path,
@@ -19,8 +20,4 @@ data class ApiRequest(
             )
         }
     }
-
-    inline fun <reified T> getBody(): T = decodeFromString<T>(body)
-
-    fun getCustomPath(): String = path.removePrefix("/v1").let { "$httpMethod $it" }
 }

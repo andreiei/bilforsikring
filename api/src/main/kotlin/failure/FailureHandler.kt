@@ -1,14 +1,13 @@
 package failure
 
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
+import ApiResponse
 import io.netty.handler.codec.http.HttpResponseStatus
-import utils.ResponseBuilder
 
 class FailureHandler {
-    operator fun invoke(throwable: Throwable): APIGatewayProxyResponseEvent {
+    operator fun invoke(throwable: Throwable): ApiResponse {
         val errorResponse: ErrorResponse = handleFailure(throwable)
         throwable.printStackTrace()
-        return ResponseBuilder.respondWithContent(errorResponse, errorResponse.code)
+        return ApiResponse.from(errorResponse, errorResponse.code)
     }
 
     private fun handleFailure(failure: Throwable): ErrorResponse {

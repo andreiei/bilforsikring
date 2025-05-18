@@ -1,28 +1,32 @@
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
+package router
+
+import ApiContext
+import ApiRequest
+import ApiResponse
 import failure.ApiException
-import router.ApiRequest
-import router.Routes
+import plugins.AuthenticationPlugin
+import router.insurance.CarInsuranceRoutes
 import kotlin.reflect.KProperty0
 
 class Router(
     private val apiContext: ApiContext = ApiContext(),
     private val carInsuranceRoutes: CarInsuranceRoutes = CarInsuranceRoutes(apiContext),
-    private val authenticator: AuthPlugin = AuthPlugin(),
+    private val authenticator: AuthenticationPlugin = AuthenticationPlugin(),
 ) {
-    operator fun invoke(request: ApiRequest): APIGatewayProxyResponseEvent {
+    operator fun invoke(request: ApiRequest): ApiResponse {
         authenticator.validate(request)
 
-        val customPath: String = request.getCustomPath()
-        val routesMap: Map<String, KProperty0<Routes>> =
+        val routesMap: Map<String, KProperty0<Route>> =
             mapOf(
                 "/v1/car-insurance" to ::carInsuranceRoutes,
             )
 
-        for ((prefix: String, routeHandler: KProperty0<Routes>) in routesMap) {
+        val customPath: String = request.getCustomPath()
+        for ((prefix: String, routeHandler: KProperty0<Route>) in routesMap) {
             if (request.path.startsWith(prefix)) {
                 return routeHandler.get().invoke(customPath, request)
             }
         }
-        throw ApiException.NotFoundException("Unsupported path: ${request.path}")
+        throw ApiException.NotFoundException("Unsupported path: $customPath")
     }
 }

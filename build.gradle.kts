@@ -27,12 +27,12 @@ allprojects {
     }
 
     kotlin {
-        jvmToolchain(21)
+        jvmToolchain(17)
     }
 
     tasks.withType<KotlinCompile>().all {
         kotlinOptions {
-            jvmTarget = "21"
+            jvmTarget = "17"
         }
     }
     tasks.withType<Test> {
@@ -68,12 +68,12 @@ allprojects {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = "17"
     }
 }

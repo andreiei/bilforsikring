@@ -10,7 +10,6 @@ open class SerializerConfig {
             Json {
                 isLenient = true
                 encodeDefaults = true
-                explicitNulls = false
                 ignoreUnknownKeys = true
             }
     }

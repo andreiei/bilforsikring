@@ -42,7 +42,7 @@ class HandlerTest : ShouldSpec() {
             val handler = Handler(
                 apiContext = ApiContext(
                     letterService = mockk {
-                        every { send(any(), any(), any()) } throws RuntimeException()
+                        every { send(any(), any(), any()) } throws RuntimeException("email service is down")
                     },
                     fagSystem = FagSystem(),
                 ),

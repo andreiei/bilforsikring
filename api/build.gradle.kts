@@ -12,4 +12,6 @@ dependencies {
     testImplementation(libs.mockk.dsl.jvm)
     testImplementation(libs.test.kotest.assertions.shared)
     testImplementation(libs.test.kotest.framework.api)
+    testImplementation(libs.test.kotest.runner)
+    permitTestUnusedDeclared(libs.test.kotest.runner)
 }

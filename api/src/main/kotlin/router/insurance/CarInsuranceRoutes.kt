@@ -1,14 +1,16 @@
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
+package router.insurance
+
+import ApiContext
+import ApiRequest
+import ApiResponse
 import failure.ApiException
-import router.ApiRequest
-import router.Routes
-import router.insurance.CarInsuranceHandler
+import router.Route
 
 class CarInsuranceRoutes(
     private val apiContext: ApiContext = ApiContext(),
     private val handler: CarInsuranceHandler = CarInsuranceHandler(apiContext),
-) : Routes() {
-    override fun invoke(path: String, request: ApiRequest): APIGatewayProxyResponseEvent {
+) : Route {
+    override fun invoke(path: String, request: ApiRequest): ApiResponse {
         return when (path) {
             "POST /car-insurance" -> handler::post
             else -> throw ApiException.NotFoundException("Unsupported method and path: $path")
